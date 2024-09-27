@@ -55,7 +55,7 @@ public class Main {
                         }
                         elementi[i] = new Immagine(titolo, luminosita);
                         elementoCreato = true; // Elemento creato con successo
-                    } else if (scelta == 2 || scelta == 3) {
+                    } else {
                         // Creazione di audio o video
                         String durataInput;
                         do {
@@ -98,7 +98,7 @@ public class Main {
                                 }
                             } while (luminosita < 1 || luminosita > 10); // Ripete finché la luminosità non è valida
                             elementi[i] = new Video(titolo, new Durata(minuti, secondi), volume, luminosita);
-                        } else {
+                        } else { // Se scelta è 2 (Audio)
                             elementi[i] = new Audio(titolo, new Durata(minuti, secondi), volume);
                         }
                         elementoCreato = true; // Elemento creato con successo
@@ -106,19 +106,21 @@ public class Main {
                 } catch (IllegalArgumentException e) {
                     System.out.println("Errore: " + e.getMessage());
                 } catch (Exception e) {
-                    System.out.println("Errore: input non valido. Premi invio e riprova.");
+                    System.out.println("Errore: input non valido. Riprova.");
                     scanner.nextLine(); // Pulisce il buffer dell'input
                 }
             }
         }
-        // Visualizzazione degli elementi creati
-        System.out.println("\nElementi creati:");
-        for (int i = 0; i < elementi.length; i++) {
-            System.out.printf("%d. %s (Tipo: %s)%n", i + 1, elementi[i].getTitolo(), elementi[i].getClass().getSimpleName());
-        }
+
         // Esecuzione degli elementi
         int scelta;
         do {
+            // Visualizzazione degli elementi creati
+            System.out.println("\nElementi creati:");
+            for (int i = 0; i < elementi.length; i++) {
+                System.out.printf("%d. %s (Tipo: %s)%n", i + 1, elementi[i].getTitolo(), elementi[i].getClass().getSimpleName());
+            }
+
             System.out.println("\nScegli quale oggetto eseguire (1-5) oppure 0 per uscire:");
             scelta = scanner.nextInt();
 
